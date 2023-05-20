@@ -8,6 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
         Title="WinNotes Config">
+    <Window.DataContext>
+        <local:ConfigViewModel/>
+    </Window.DataContext>
     <Grid>
         <TabControl x:Name="TabC_Config">
             <TabItem Header="Clipboard">

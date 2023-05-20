@@ -39,6 +39,7 @@ namespace ExpressionEncrypter
         public void Read(string path, out object decryptedObjectpt, Type type)
         {
             decryptedObjectpt = null;
+            string currentDir = Environment.CurrentDirectory;
             if (File.Exists(path))
             {
                 Stream? stream = null;
