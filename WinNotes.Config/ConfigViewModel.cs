@@ -39,7 +39,7 @@ namespace WinNotes.Config
         private void Save()
         {
             Encrypter encrypter = new Encrypter();
-            encrypter.Save(Expressions, FileName);
+            encrypter.Save(Expressions, FileName, true, null);
         }
 
         private void NewExpression()
