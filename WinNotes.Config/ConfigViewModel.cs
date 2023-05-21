@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExpressionEncrypter;
@@ -51,11 +52,14 @@ namespace WinNotes.Config
         {
             Encrypter encrypter = new Encrypter();
             object? expressions = null;
-            encrypter.Read(FileName, out expressions, typeof(ExpressionCollection));
-            if ((expressions != null) &&
-                (expressions.GetType() == typeof(ExpressionCollection)))
+            if (File.Exists(FileName))
             {
-                Expressions = (ExpressionCollection)expressions;
+                encrypter.Read(FileName, out expressions, typeof(ExpressionCollection));
+                if ((expressions != null) &&
+                    (expressions.GetType() == typeof(ExpressionCollection)))
+                {
+                    Expressions = (ExpressionCollection)expressions;
+                }
             }
 
         }
