@@ -20,28 +20,19 @@ namespace ExpressionEncrypter
         }
 
         public void Save(object objectToEncrypt, string path,
-                         bool base64, string key)
+                         string key)
         {
             ObjectToEncrypt = objectToEncrypt;
             try
             {
                 XmlSerializer serializer = new XmlSerializer(ObjectToEncrypt.GetType());
-                //if (base64)
-                //{
-                    MemoryStream memStream = new MemoryStream();
-                    serializer.Serialize(memStream, objectToEncrypt);
-                    var byteArray = memStream.ToArray();
-                    string base64String = Convert.ToBase64String(byteArray);
-                string pathBase64 = "64_" + path;
-                    StreamWriter textWriter = File.CreateText(pathBase64);
-                    textWriter.WriteLine(base64String);
+                MemoryStream memStream = new MemoryStream();
+                serializer.Serialize(memStream, objectToEncrypt);
+                var byteArray = memStream.ToArray();
+                string base64String = Convert.ToBase64String(byteArray);
+                StreamWriter textWriter = File.CreateText(path);
+                textWriter.WriteLine(base64String);
                 textWriter.Close();
-                //}
-                //else
-                //{
-                    Stream stream = new FileStream(path, FileMode.OpenOrCreate);
-                    serializer.Serialize(stream, objectToEncrypt);
-                //}
             }
             catch (Exception ex)
             {
@@ -52,11 +43,10 @@ namespace ExpressionEncrypter
         public void Read(string path, out object decryptedObjectpt, Type type)
         {
             decryptedObjectpt = null;
-            string pathBase64 = "64_" + path;
             string currentDir = Environment.CurrentDirectory;
-            if (File.Exists(pathBase64))
+            if (File.Exists(path))
             {
-                var lines = File.ReadLines(pathBase64);
+                var lines = File.ReadLines(path);
                 if ((lines != null) && (lines.Count() == 1))
                 {
                     try
@@ -66,31 +56,6 @@ namespace ExpressionEncrypter
                         XmlSerializer serializer = new XmlSerializer(type);
                         MemoryStream stream = new MemoryStream(bytes);
                         decryptedObjectpt = serializer.Deserialize(stream);
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Assert(false);
-                    }
-                }
-            }
-                if (File.Exists(path))
-            {
-                Stream? stream = null;
-                try
-                {
-                    stream = new FileStream(path, FileMode.Open);
-                }
-                catch (Exception ex)
-                {
-                    Debug.Assert(false);
-                }
-                if (stream != null)
-                {
-                    try
-                    {
-                        XmlSerializer serializer = new XmlSerializer(type);
-                        decryptedObjectpt = serializer.Deserialize(stream);
-                        stream.Close();
                     }
                     catch (Exception ex)
                     {

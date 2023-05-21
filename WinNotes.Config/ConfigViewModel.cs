@@ -27,7 +27,7 @@ namespace WinNotes.Config
                 OnPropertyChanged(nameof(Expressions));
             }
         }
-        public const string FileName = "Expressions.xml";
+        public const string FileName = "Expressions.notes";
 
         public ConfigViewModel()
         {
@@ -39,11 +39,15 @@ namespace WinNotes.Config
         private void Save()
         {
             Encrypter encrypter = new Encrypter();
-            encrypter.Save(Expressions, FileName, true, null);
+            encrypter.Save(Expressions, FileName, null);
         }
 
         private void NewExpression()
         {
+            if (Expressions == null)
+            {
+                Expressions = new ExpressionCollection();
+            }
             Expressions.AddExpression("New", string.Empty);
             OnPropertyChanged(nameof(Expressions));
         }
