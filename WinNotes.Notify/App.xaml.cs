@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 
-namespace NotifyIconWpf.Sample.Windowless
+namespace WinNotes.Notify
 {
     /// <summary>
     /// Simple application. Check the XAML for comments.

@@ -11,24 +11,32 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Button Content="New" Command="{Binding Cmd_New}" Height="30" Width="120"/>
             <Button Content="Save" Command="{Binding Cmd_Save}" Height="30" Width="120"/>
             <Button Content="Open" Command="{Binding Cmd_Open}" Height="30" Width="120"/>
         </StackPanel>
-        <DataGrid
-            ItemsSource="{Binding Expressions}"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            Width="400"
-            HorizontalAlignment="Left"
-            Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"
-                                    Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Content"
-                                    Binding="{Binding Content}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView ItemsSource="{Binding Expressions}"
+                  SelectedItem="{Binding SelectedExpression}"
+                  Grid.Row="1"
+                  Grid.Column="0" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Separator Grid.Column="1"/>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+            <Label Content="Name :"/>
+            <TextBox Text="{Binding SelectedExpression.Name}"/>
+            <Label Content="Content :"/>
+            <TextBox Text="{Binding SelectedExpression.Content}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

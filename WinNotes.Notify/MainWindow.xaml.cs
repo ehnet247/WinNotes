@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace NotifyIconWpf.Sample.Windowless
+namespace WinNotes.Notify
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

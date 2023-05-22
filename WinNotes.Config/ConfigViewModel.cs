@@ -27,6 +27,16 @@ namespace WinNotes.Config
                 OnPropertyChanged(nameof(Expressions));
             }
         }
+        private object _SelectedExpression;
+        public object SelectedExpression
+        {
+            get => _SelectedExpression;
+            set
+            {
+                _SelectedExpression = value;
+                OnPropertyChanged(nameof(SelectedExpression));
+            }
+        }
         public const string FileName = "Expressions.notes";
 
         public ConfigViewModel()

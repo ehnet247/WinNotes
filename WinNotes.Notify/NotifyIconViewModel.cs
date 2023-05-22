@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using WinNotes.Config;
 
-namespace NotifyIconWpf.Sample.Windowless
+namespace WinNotes.Notify
 {
     /// <summary>
     /// Provides bindable properties and commands for the NotifyIcon. In this sample, the
