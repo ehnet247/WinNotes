@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WinNotes.Config"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -18,8 +18,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Button Content="New" Command="{Binding Cmd_New}" Height="30" Width="120"/>
-            <Button Content="Save" Command="{Binding Cmd_Save}" Height="30" Width="120"/>
-            <Button Content="Open" Command="{Binding Cmd_Open}" Height="30" Width="120"/>
+            <Button Content="Delete" Command="{Binding Cmd_Delete}" Height="30" Width="120"/>
+            <Button Content="Duplicate" Command="{Binding Cmd_Duplicate}" Height="30" Width="120"/>
         </StackPanel>
         <ListView ItemsSource="{Binding Expressions}"
                   SelectedItem="{Binding SelectedExpression}"
@@ -31,12 +31,31 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Separator Grid.Column="1"/>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
-            <Label Content="Name :"/>
-            <TextBox Text="{Binding SelectedExpression.Name}"/>
-            <Label Content="Content :"/>
-            <TextBox Text="{Binding SelectedExpression.Content}"/>
-        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="2" Margin="0,0,0,30">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <Label Content="Name :"/>
+                <TextBox Text="{Binding ExpressionNameEdit}" Width="200" HorizontalAlignment="Left"/>
+                <Label Content="Content :"/>
+                <TextBox Text="{Binding ExpressionContentEdit}" Width="300" HorizontalAlignment="Left"/>
+                
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Ok" Command="{Binding Cmd_Ok}"
+                        Grid.Column="0" Width="80" Height="30" HorizontalAlignment="Left"/>
+                <Button Content="Cancel"  Command="{Binding Cmd_Cancel}"
+                        Grid.Column="2" Width="80" Height="30" HorizontalAlignment="Left"/>
+
+            </Grid>
+        </Grid>
+        
     </Grid>
 </UserControl>

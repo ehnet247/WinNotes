@@ -7,12 +7,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ExpressionEncrypter
 {
     public class ExpressionCollection : ObservableCollection<Expression>
     {
-        public void AddExpression(string name, string content, [CallerMemberName] string caller = "")
+        public Expression AddExpression(string name, string content, [CallerMemberName] string caller = "")
         {
             Expression expression = new Expression(name, content);
             if ((expression != null) && (!this.ContainsKey(expression.Name)))
@@ -22,11 +23,32 @@ namespace ExpressionEncrypter
                     new PropertyChangedEventArgs(caller);
                 OnPropertyChanged(e);
             }
+            return expression;
         }
 
-        public bool ContainsKey(string key)
+        public bool ContainsKey(string name)
         {
+            var expression = this.Where(x => x.Name == name).SingleOrDefault();
+            if ((expression != null) && (expression != default))
+            {
+                return true;
+            }
             return false;
+        }
+
+        public void Delete(string name, [CallerMemberName] string caller = "")
+        {
+            if (this.ContainsKey(name))
+            {
+                var expression = this.Where(x => x.Name == name).SingleOrDefault();
+                if ((expression != null) && (expression != default))
+                {
+                    this.Remove(expression);
+                }
+                PropertyChangedEventArgs e =
+                    new PropertyChangedEventArgs(caller);
+                OnPropertyChanged(e);
+            }
         }
     }
 

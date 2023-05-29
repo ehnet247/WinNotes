@@ -10,13 +10,18 @@ using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExpressionEncrypter;
+using System.Windows;
+using System.Configuration;
 
 namespace WinNotes.Config
 {
     public class ConfigViewModel : ObservableRecipient
     {
         public ICommand Cmd_New { get; private set; }
-        public ICommand Cmd_Save { get; private set; }
+        public ICommand Cmd_Ok { get; private set; }
+        public ICommand Cmd_Delete { get; private set; }
+        public ICommand Cmd_Cancel { get; private set; }
+        public ICommand Cmd_Duplicate { get; private set; }
         private ExpressionCollection _Expressions;
         public ExpressionCollection Expressions
         {
@@ -34,15 +39,78 @@ namespace WinNotes.Config
             set
             {
                 _SelectedExpression = value;
+                var selectedExpression = value as ExpressionEncrypter.Expression;
+                if (selectedExpression != null)
+                {
+                    ExpressionNameEdit = selectedExpression.Name;
+                ExpressionContentEdit = selectedExpression.Content;
+                }
+                else
+                {
+                    ExpressionNameEdit = string.Empty;
+                    ExpressionContentEdit = string.Empty;
+                }
                 OnPropertyChanged(nameof(SelectedExpression));
             }
         }
-        public const string FileName = "Expressions.notes";
+
+        private string _ExpressionNameEdit;
+        public string ExpressionNameEdit
+        {
+            get => _ExpressionNameEdit;
+            set
+            {
+                _ExpressionNameEdit = value;
+                var selectedExpression = SelectedExpression as ExpressionEncrypter.Expression;
+                if (selectedExpression != null)
+                {
+                    selectedExpression.Name = value;
+                }
+                OnPropertyChanged(nameof(ExpressionNameEdit));
+                OnPropertyChanged(nameof(Expressions));
+            }
+        }
+
+        private string _ExpressionContentEdit;
+        public string ExpressionContentEdit
+        {
+            get => _ExpressionContentEdit;
+            set
+            {
+                _ExpressionContentEdit = value;
+                var selectedExpression = SelectedExpression as ExpressionEncrypter.Expression;
+                if (selectedExpression != null)
+                {
+                    selectedExpression.Content = value;
+                }
+                OnPropertyChanged(nameof(ExpressionContentEdit));
+                OnPropertyChanged(nameof(Expressions));
+            }
+        }
+
+        public string FileName
+        {
+            get
+            {
+                string? fileName = ConfigurationManager.AppSettings["expressionsFileName"];
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    return fileName;
+                }
+                else
+                {
+                    return "Expressions.notes";
+                }
+            }
+        }
 
         public ConfigViewModel()
         {
             Cmd_New = new RelayCommand(NewExpression);
-            Cmd_Save = new RelayCommand(Save);
+            Cmd_Delete = new RelayCommand(DeleteExpression);
+            Cmd_Duplicate = new RelayCommand(Duplicate);
+            Cmd_Ok = new RelayCommand(Save);
+            Cmd_Cancel = new RelayCommand(CancelEdit);
             Open();
         }
 
@@ -50,6 +118,11 @@ namespace WinNotes.Config
         {
             Encrypter encrypter = new Encrypter();
             encrypter.Save(Expressions, FileName, null);
+        }
+
+        private void CancelEdit()
+        {
+            SelectedExpression = null;
         }
 
         private void NewExpression()
@@ -60,6 +133,36 @@ namespace WinNotes.Config
             }
             Expressions.AddExpression("New", string.Empty);
             OnPropertyChanged(nameof(Expressions));
+        }
+
+        private void Duplicate()
+        {
+            if ((Expressions != null) && (SelectedExpression != null))
+            {
+                var selectedExpression = SelectedExpression as ExpressionEncrypter.Expression;
+                if (selectedExpression != null)
+                {
+                    string name = selectedExpression.Name + " bis";
+                    SelectedExpression = Expressions.AddExpression(name,
+                                         selectedExpression.Content);
+                    OnPropertyChanged(nameof(Expressions));
+                }
+            }
+        }
+
+        private void DeleteExpression()
+        {
+            if ((Expressions != null) && (SelectedExpression != null))
+            {
+                var selectedExpression = SelectedExpression as ExpressionEncrypter.Expression;
+                if (selectedExpression != null)
+                {
+                    Expressions.Delete(selectedExpression.Name);
+                    Save();
+                    SelectedExpression = null;
+                    OnPropertyChanged(nameof(Expressions));
+                }
+            }
         }
 
         private void Open()
