@@ -18,6 +18,12 @@ namespace TestClipboard
         {
             var window = new WindowClipboard();
             window.Show();
+            var dataContext = window.DataContext as ClipboardViewModel;
+            if (dataContext != null)
+            {
+                var expressionsFileName = ConfigurationManager.AppSettings["expressionsFileName"];
+                dataContext.SetFileName(expressionsFileName);
+            }
         }
     }
 }

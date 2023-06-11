@@ -18,11 +18,16 @@ namespace WinNotes.Clipboard
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class WindowClipboard : UserControl
+    public partial class WindowClipboard : Window
     {
         public WindowClipboard()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_Selected(object sender, RoutedEventArgs e)
+        {
+            //Dispatcher.BeginInvoke( new Action(() => { this.Close(); }), System.Windows.Threading.DispatcherPriority.ContextIdle);
         }
     }
 }

@@ -4,6 +4,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressionEncrypter\ExpressionEncrypter.csproj" />
+    <ProjectReference Include="..\WinNotes.Config\WinNotes.Config.csproj" />
+  </ItemGroup>
 
 </Project>

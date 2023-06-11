@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TextCopy;
 
 namespace ExpressionEncrypter
 {
@@ -49,6 +50,11 @@ namespace ExpressionEncrypter
                     new PropertyChangedEventArgs(caller);
                 OnPropertyChanged(e);
             }
+        }
+
+        public void CopyToClipboard(string text)
+        {
+            ClipboardService.SetText(text);
         }
     }
 
