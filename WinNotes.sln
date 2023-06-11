@@ -20,7 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinNotes.Config", "WinNotes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionEncrypter", "ExpressionEncrypter\ExpressionEncrypter.csproj", "{AD2C75EC-0DB6-432D-BFC4-A63A35F7A6E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConfig", "TestConfig\TestConfig.csproj", "{D92BED6C-EE0E-4352-B8D7-9AE7D24C2BC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConfig", "TestConfig\TestConfig.csproj", "{D92BED6C-EE0E-4352-B8D7-9AE7D24C2BC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinNotes.Clipboard", "WinNotes.Clipboard\WinNotes.Clipboard.csproj", "{650E1A39-0AC3-44F5-AFC8-5875DDF7FBD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClipboard", "TestClipboard\TestClipboard.csproj", "{CF991ABF-2DDD-4805-9518-0C984EB076B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,14 @@ Global
 		{D92BED6C-EE0E-4352-B8D7-9AE7D24C2BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D92BED6C-EE0E-4352-B8D7-9AE7D24C2BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D92BED6C-EE0E-4352-B8D7-9AE7D24C2BC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650E1A39-0AC3-44F5-AFC8-5875DDF7FBD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650E1A39-0AC3-44F5-AFC8-5875DDF7FBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650E1A39-0AC3-44F5-AFC8-5875DDF7FBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650E1A39-0AC3-44F5-AFC8-5875DDF7FBD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF991ABF-2DDD-4805-9518-0C984EB076B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF991ABF-2DDD-4805-9518-0C984EB076B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF991ABF-2DDD-4805-9518-0C984EB076B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF991ABF-2DDD-4805-9518-0C984EB076B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
