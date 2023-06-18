@@ -18,9 +18,9 @@ namespace WinNotes.Config
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class WindowConfig : Window
+    public partial class ConfigWindow : Window
     {
-        public WindowConfig()
+        public ConfigWindow()
         {
             InitializeComponent();
         }

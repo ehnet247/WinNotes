@@ -12,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinNotes.Notify;
 
 namespace WinNotes.Clipboard
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class WindowClipboard : Window
+    public partial class ClipboardWindow : Window
     {
-        public WindowClipboard()
+        public ClipboardWindow(INotesService notesService)
         {
             InitializeComponent();
         }

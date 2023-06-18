@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using WinNotes.Config;
@@ -12,6 +13,7 @@ namespace WinNotes.Notify
     /// </summary>
     public class NotifyIconViewModel : ObservableRecipient
     {
+        public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
         /// <summary>
         /// Shows a window, if none is already open.
         /// </summary>
@@ -25,7 +27,7 @@ namespace WinNotes.Notify
                     CanExecuteFunc = () => canExecuteFunc,
                     CommandAction = () =>
                     {
-                        Application.Current.MainWindow = new WindowConfig();
+                        Application.Current.MainWindow = new ConfigWindow();
                         OnPropertyChanged(nameof(ShowWindowCommand));
                         Application.Current.MainWindow.Show();
                     }
@@ -44,7 +46,7 @@ namespace WinNotes.Notify
                     CanExecuteFunc = () => Application.Current.MainWindow == null,
                     CommandAction = () =>
                     {
-                        Application.Current.MainWindow = new WindowConfig();
+                        Application.Current.MainWindow = new ConfigWindow();
                         Application.Current.MainWindow.Show();
                     }
                 };
@@ -76,6 +78,30 @@ namespace WinNotes.Notify
             {
                 return new DelegateCommand {CommandAction = () => Application.Current.Shutdown()};
             }
+        }
+
+        public NotifyIconViewModel()
+        {
+            MenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new MenuItemViewModel { Header = "Alpha" },
+                new MenuItemViewModel { Header = "Beta",
+                    MenuItems = new ObservableCollection<MenuItemViewModel>
+                        {
+                            new MenuItemViewModel { Header = "Beta1" },
+                            new MenuItemViewModel { Header = "Beta2",
+                                MenuItems = new ObservableCollection<MenuItemViewModel>
+                                {
+                                    new MenuItemViewModel { Header = "Beta1a" },
+                                    new MenuItemViewModel { Header = "Beta1b" },
+                                    new MenuItemViewModel { Header = "Beta1c" }
+                                }
+                            },
+                            new MenuItemViewModel { Header = "Beta3" }
+                        }
+                },
+                new MenuItemViewModel { Header = "Gamma" }
+            };
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TestConfig
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var window = new WindowConfig();
+            var window = new ConfigWindow();
             window.Show();
         }
     }

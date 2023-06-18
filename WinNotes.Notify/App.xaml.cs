@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using Hardcodet.Wpf.TaskbarNotification;
+using WinNotes.Config;
 
 namespace WinNotes.Notify
 {
@@ -9,6 +12,10 @@ namespace WinNotes.Notify
     public partial class App : Application
     {
         private TaskbarIcon notifyIcon;
+
+        public App()
+        {
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {

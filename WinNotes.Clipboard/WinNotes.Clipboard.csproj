@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ExpressionEncrypter\ExpressionEncrypter.csproj" />
     <ProjectReference Include="..\WinNotes.Config\WinNotes.Config.csproj" />
+    <ProjectReference Include="..\WinNotes.Notify\WinNotes.Notify.csproj" />
   </ItemGroup>
 
 </Project>
