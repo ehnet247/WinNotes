@@ -88,7 +88,8 @@ namespace WinNotes.Notify
             {
                 foreach (var expression in expressions)
                 {
-                    expressionsMenuItems.Add(new MenuItemViewModel(expression.Name));
+                    var menuItem = new MenuItemViewModel(expression.Name, expression.ClipboardCommand);
+                    expressionsMenuItems.Add(menuItem);
                 }
             }
             MenuItems = new ObservableCollection<MenuItemViewModel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,10 +17,17 @@ namespace WinNotes.Notify
         {
             _command = new CommandViewModel(Execute);
         }
-        public MenuItemViewModel(string header)
+        public MenuItemViewModel(string header, Action clipboardCommand)
         {
             Header = header;
-            _command = new CommandViewModel(Execute);
+            if (clipboardCommand != null)
+            {
+                _command = new RelayCommand(clipboardCommand);
+            }
+            else
+            {
+                _command = new CommandViewModel(Execute);
+            }
         }
 
         public string Header { get; set; }

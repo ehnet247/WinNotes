@@ -74,5 +74,10 @@ namespace ExpressionEncrypter
             Name = name;
             Content = content;
         }
+
+        public void ClipboardCommand()
+        {
+            TextCopy.ClipboardService.SetText(Content);
+        }
     }
 }
