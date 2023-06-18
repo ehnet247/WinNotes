@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ExpressionEncrypter;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -80,11 +81,33 @@ namespace WinNotes.Notify
             }
         }
 
+        public NotifyIconViewModel(ExpressionCollection expressions)
+        {
+            var expressionsMenuItems = new ObservableCollection<MenuItemViewModel>();
+            if (expressions.Count > 0)
+            {
+                foreach (var expression in expressions)
+                {
+                    expressionsMenuItems.Add(new MenuItemViewModel(expression.Name));
+                }
+            }
+            MenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new MenuItemViewModel { Header = "Config" }
+            };
+            if (expressions.Count > 0)
+            {
+                MenuItems.Add(new MenuItemViewModel { Header = "Clipboard",
+                    MenuItems = expressionsMenuItems
+                });
+            };
+        }
+
         public NotifyIconViewModel()
         {
             MenuItems = new ObservableCollection<MenuItemViewModel>
             {
-                new MenuItemViewModel { Header = "Alpha" },
+                new MenuItemViewModel { Header = "Config" },
                 new MenuItemViewModel { Header = "Beta",
                     MenuItems = new ObservableCollection<MenuItemViewModel>
                         {

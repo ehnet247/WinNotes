@@ -16,6 +16,11 @@ namespace WinNotes.Notify
         {
             _command = new CommandViewModel(Execute);
         }
+        public MenuItemViewModel(string header)
+        {
+            Header = header;
+            _command = new CommandViewModel(Execute);
+        }
 
         public string Header { get; set; }
 
@@ -31,7 +36,6 @@ namespace WinNotes.Notify
 
         private void Execute()
         {
-            // (NOTE: In a view model, you normally should not use MessageBox.Show()).
             Console.WriteLine("Clicked at " + Header);
         }
     }

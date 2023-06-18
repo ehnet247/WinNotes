@@ -178,7 +178,6 @@ namespace WinNotes.Config
                     Expressions = (ExpressionCollection)expressions;
                 }
             }
-
         }
     }
 }
