@@ -109,15 +109,27 @@ namespace WinNotes.Config
             Cmd_New = new RelayCommand(NewExpression);
             Cmd_Delete = new RelayCommand(DeleteExpression);
             Cmd_Duplicate = new RelayCommand(Duplicate);
-            Cmd_Ok = new RelayCommand(Save);
-            Cmd_Cancel = new RelayCommand(CancelEdit);
+            Cmd_Ok = new RelayCommand(SaveAndExit);
+            Cmd_Cancel = new RelayCommand(CancelAndExit);
             Open();
+        }
+
+        private void SaveAndExit()
+        {
+            Save();
+            Application.Current.MainWindow.Close();
         }
 
         private void Save()
         {
             Encrypter encrypter = new Encrypter();
             encrypter.Save(Expressions, FileName, null);
+        }
+
+        private void CancelAndExit()
+        {
+            CancelEdit();
+            Application.Current.MainWindow.Close();
         }
 
         private void CancelEdit()

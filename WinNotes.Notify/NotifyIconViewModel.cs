@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ExpressionEncrypter;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -94,7 +95,7 @@ namespace WinNotes.Notify
             }
             MenuItems = new ObservableCollection<MenuItemViewModel>
             {
-                new MenuItemViewModel { Header = "Config" }
+                new MenuItemViewModel("Config", new Action(StartConfig))
             };
             if (expressions.Count > 0)
             {
@@ -104,28 +105,16 @@ namespace WinNotes.Notify
             };
         }
 
+        private void StartConfig()
+        {
+            Console.WriteLine("StartConfig()");
+            Application.Current.MainWindow = new ConfigWindow();
+            OnPropertyChanged(nameof(ShowWindowCommand));
+            Application.Current.MainWindow.Show();
+        }
+
         public NotifyIconViewModel()
         {
-            MenuItems = new ObservableCollection<MenuItemViewModel>
-            {
-                new MenuItemViewModel { Header = "Config" },
-                new MenuItemViewModel { Header = "Beta",
-                    MenuItems = new ObservableCollection<MenuItemViewModel>
-                        {
-                            new MenuItemViewModel { Header = "Beta1" },
-                            new MenuItemViewModel { Header = "Beta2",
-                                MenuItems = new ObservableCollection<MenuItemViewModel>
-                                {
-                                    new MenuItemViewModel { Header = "Beta1a" },
-                                    new MenuItemViewModel { Header = "Beta1b" },
-                                    new MenuItemViewModel { Header = "Beta1c" }
-                                }
-                            },
-                            new MenuItemViewModel { Header = "Beta3" }
-                        }
-                },
-                new MenuItemViewModel { Header = "Gamma" }
-            };
         }
     }
 }
